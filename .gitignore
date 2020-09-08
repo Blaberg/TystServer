@@ -54,4 +54,4 @@ Mkfile.old
 dkms.conf
 
 # IDEA files
-.idea
+.idea/
