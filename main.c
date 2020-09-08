@@ -36,12 +36,10 @@ head MakeEmpty(head h);        /*clearing list*/
 void Delete(int port, head h);    /*delete client values on client exit*/
 void Insert(int port, char *, head h, addr a);/*inserting new client */
 void DeleteList(head h);        /*clearing list*/
-void Display(const head h);        /*list all clients connected*/
 void *Quitproc();             /*signal handler*/
 void *server(void *arg);        /*server instance for every connected client*/
-void zzz();
-void Broadcast(head list, char * message, int buffersize, int flags, int senderPort);
 
+void Broadcast(head list, char *message, int buffersize, int flags, int senderPort);
 
 
 char username[10];        /*size of username*/
@@ -49,6 +47,8 @@ int sf2;
 head h;                /*variable of type struct head*/
 char buffer[MAXDATALEN];
 
+#pragma clang diagnostic push
+#pragma ide diagnostic ignored "EndlessLoop"
 /******main starts ***********/
 int main(int argc, char *argv[]) {
 
@@ -103,7 +103,6 @@ int main(int argc, char *argv[]) {
     printf("waiting for clients......\n");
 
     if (signal(SIGINT, (void *) Quitproc) == 0)    //signal handler
-        if (signal(SIGTSTP, zzz) == 0)            //signal handler
 
             while (1) {
                 cli_size = sizeof(struct sockaddr_in); //cli_size necessary as an argument for pthread_create
@@ -122,12 +121,7 @@ int main(int argc, char *argv[]) {
                 /*=notify all clients about newly joining clients=*/
                 a = h;
 
-                do {
-                    a = a->next;
-                    sf2 = a->port;
-                    if (sf2 != new_fd)
-                        send(sf2, buffer, sizeof(buffer), 0);
-                } while (a->next != NULL);
+                Broadcast(h,buffer,sizeof(buffer), 0, new_fd);
 
                 printf("server got connection from %s & %d\n\n", inet_ntoa(client_addr.sin_addr), new_fd); // debugging
 
@@ -143,6 +137,7 @@ int main(int argc, char *argv[]) {
     close(sockfd);
 
 }/********main ends***********/
+#pragma clang diagnostic pop
 
 
 /*******ALL FUNCTIONS DEFINED BELOW*********/
@@ -178,12 +173,8 @@ void *server(void *arguments) {
         bzero(buffer, 256);
         y = recv(ts_fd, buffer, MAXDATALEN, 0);
 
-        if (y == 0)
-            goto jmp;
-
         /*=if a client quits=*/
-        if (strncmp(buffer, "quit", 4) == 0) {
-            jmp:
+        if (strncmp(buffer, "quit", 4) == 0 || y == 0) {
             printf("%d ->%s left chat deleting from list\n", ts_fd, uname);
             sprintf(buffer, "%s has left the chat\n", uname);
 
@@ -197,7 +188,6 @@ void *server(void *arguments) {
                     send(sfd, buffer, MAXDATALEN, 0);
             } while (a->next != NULL);
 
-            Display(h);
 
             close(ts_fd);
             free(msg);
@@ -223,7 +213,6 @@ void *server(void *arguments) {
 
         } while (a->next != NULL);
 
-        Display(h);
         bzero(msg, MAXDATALEN);
 
     }//end while
@@ -267,20 +256,6 @@ void Insert(int port, char *username, head h, addr a) {
     a->next = TmpCell;
 }
 
-/*========displaying all clients in list==================*/
-void Display(const head h) {
-    addr a = h;
-    if (h->next == NULL)
-        printf("NO ONLINE  CLIENTS\n");
-
-    else {
-        do {
-            a = a->next;
-            printf("%d->%s \t", a->port, a->username);
-        } while (a->next != NULL);
-        printf("\n");
-    }
-}
 
 /*===========client deleted from list if client quits================*/
 void Delete(int port, head h) {
@@ -291,7 +266,7 @@ void Delete(int port, head h) {
     if (a->next != NULL) {
         TmpCell = a->next;
         a->next = TmpCell->next;
-        free(TmpCell);
+        pthread_cancel(TmpCell);
     }
 }
 
@@ -309,33 +284,19 @@ void Quitall() {
     if (h->next == NULL) {
         printf("......BYE.....\nno clients \n\n");
         exit(0);
-    } /*else {
-
-        do {
-            i++;
-            a = a->next;
-            sfd = a->port;
-            send(sfd, "server down", 13, 0);
-        } while (a->next != NULL);
-        printf("%d clients closed\n\n", i);
-    }*/else{
+    } else {
         i++;
-        Broadcast(h,"server down", 13,0, -1);
+        Broadcast(h, "server down", 13, 0, -1);
     }
     printf("%d clients closed\n\n", i);
 }
 
-void zzz() {
-    printf("\rDISPLAYING ONLINE CLIENTS\n\n");
-    Display(h);
-}
-
-void Broadcast(head list,char * message,int buffersize,int flags,int senderPort) {
+void Broadcast(head list, char *message, int buffersize, int flags, int senderPort) {
     addr a = list;
     do {
         a = a->next;
-        if(a->port != senderPort)
-        send(a->port, message, buffersize, flags);
+        if (a->port != senderPort)
+            send(a->port, message, buffersize, flags);
     } while (a->next != NULL);
 }
 
