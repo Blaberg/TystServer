@@ -1,4 +1,4 @@
-# Install script for directory: /Users/john.blaberg/Desktop/TystChat/TystServer
+# Install script for directory: /Users/Herman/Desktop/Projects/TystServer
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -40,5 +40,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/Users/john.blaberg/Desktop/TystChat/TystServer/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/Users/Herman/Desktop/Projects/TystServer/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
