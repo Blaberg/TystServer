@@ -1,0 +1,30 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/Users/Herman/Desktop/Projects/TystServer/main.c
+stdio.h
+-
+stdlib.h
+-
+sys/socket.h
+-
+sys/types.h
+-
+string.h
+-
+netinet/in.h
+-
+pthread.h
+-
+arpa/inet.h
+-
+unistd.h
+-
+signal.h
+-
+

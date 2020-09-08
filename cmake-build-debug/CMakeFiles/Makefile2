@@ -55,19 +55,19 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake
+CMAKE_COMMAND = /private/var/folders/yv/0d9t4cns48g4lrrkt7vs8ytm0000gn/T/AppTranslocation/69897638-F738-494F-9C26-A2B83ADDD8EB/d/CLion.app/Contents/bin/cmake/mac/bin/cmake
 
 # The command to remove a file.
-RM = /Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -E rm -f
+RM = /private/var/folders/yv/0d9t4cns48g4lrrkt7vs8ytm0000gn/T/AppTranslocation/69897638-F738-494F-9C26-A2B83ADDD8EB/d/CLion.app/Contents/bin/cmake/mac/bin/cmake -E rm -f
 
 # Escaping for special characters.
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /Users/john.blaberg/Desktop/TystChat/TystServer
+CMAKE_SOURCE_DIR = /Users/Herman/Desktop/Projects/TystServer
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Users/john.blaberg/Desktop/TystChat/TystServer/cmake-build-debug
+CMAKE_BINARY_DIR = /Users/Herman/Desktop/Projects/TystServer/cmake-build-debug
 
 #=============================================================================
 # Directory level rules for the build root directory
@@ -94,14 +94,14 @@ clean: CMakeFiles/TystServer.dir/clean
 CMakeFiles/TystServer.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/TystServer.dir/build.make CMakeFiles/TystServer.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/TystServer.dir/build.make CMakeFiles/TystServer.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/john.blaberg/Desktop/TystChat/TystServer/cmake-build-debug/CMakeFiles --progress-num=1,2 "Built target TystServer"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/Herman/Desktop/Projects/TystServer/cmake-build-debug/CMakeFiles --progress-num=1,2 "Built target TystServer"
 .PHONY : CMakeFiles/TystServer.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/TystServer.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/john.blaberg/Desktop/TystChat/TystServer/cmake-build-debug/CMakeFiles 2
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/Herman/Desktop/Projects/TystServer/cmake-build-debug/CMakeFiles 2
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/TystServer.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/john.blaberg/Desktop/TystChat/TystServer/cmake-build-debug/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/Herman/Desktop/Projects/TystServer/cmake-build-debug/CMakeFiles 0
 .PHONY : CMakeFiles/TystServer.dir/rule
 
 # Convenience name for target.
