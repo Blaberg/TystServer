@@ -1,10 +1,7 @@
 /****SERVER CODE****/
-
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/socket.h>        //for sockets
-#include <sys/types.h>
 #include <string.h>        //for string operations
 #include <netinet/in.h>        //Internet Protocol family sockaddr_in defined here
 #include <pthread.h>        // for the cosy POSIX threads
@@ -18,7 +15,6 @@
 
 /*Note:   The port argument is optional. If no port is specified,
  *          the server uses the default given by PORT.*/
-
 
 struct Node                    /*structure to handle all clients*/
 {
@@ -39,11 +35,9 @@ void DeleteList(head h);        /*clearing list*/
 void *Quitproc();             /*signal handler*/
 void *server(void *arg);        /*server instance for every connected client*/
 
-void Broadcast(head list, char *message, int buffersize, int flags, int senderPort);
-
+int Broadcast(head list, char *message, int bufferSize, int flags, int senderPort);
 
 char username[10];        /*size of username*/
-int sf2;
 head h;                /*variable of type struct head*/
 char buffer[MAXDATALEN];
 
@@ -70,7 +64,6 @@ int main(int argc, char *argv[]) {
     printf("PORT NO.:\t%d\n", portnum);
 
     h = MakeEmpty(NULL);        //frees the list
-
 
     /*=set info of server =*/
     server_addr.sin_family = AF_INET;        /* set family to Internet     */
@@ -119,8 +112,6 @@ int main(int argc, char *argv[]) {
                 a = a->next;
 
                 /*=notify all clients about newly joining clients=*/
-                a = h;
-
                 Broadcast(h,buffer,sizeof(buffer), 0, new_fd);
 
                 printf("server got connection from %s & %d\n\n", inet_ntoa(client_addr.sin_addr), new_fd); // debugging
@@ -188,7 +179,6 @@ void *server(void *arguments) {
                     send(sfd, buffer, MAXDATALEN, 0);
             } while (a->next != NULL);
 
-
             close(ts_fd);
             free(msg);
 
@@ -202,16 +192,8 @@ void *server(void *arguments) {
         strp = msg;
         strp += x;
         strcat(strp, buffer);
-        msglen = strlen(msg);
 
-        addr a = h;
-        do {
-            a = a->next;
-            sfd = a->port;
-            if (sfd != ts_fd)
-                send(sfd, msg, msglen, 0);
-
-        } while (a->next != NULL);
+        Broadcast(h,msg,strlen(msg);,0,ts_fd);
 
         bzero(msg, MAXDATALEN);
 
@@ -266,39 +248,37 @@ void Delete(int port, head h) {
     if (a->next != NULL) {
         TmpCell = a->next;
         a->next = TmpCell->next;
-        pthread_cancel(TmpCell);
+        free(TmpCell);
     }
 }
 
 /*======handling signals==========*/
 void *Quitproc() {
-    printf("\n\nSERVER SHUTDOWN\n");
     Quitall();
     exit(0);
 }
 
 /*===============notifying server shutdown===========*/
 void Quitall() {
-    int sfd;
-    int i = 0;
+    int i;
     if (h->next == NULL) {
         printf("......BYE.....\nno clients \n\n");
         exit(0);
     } else {
-        i++;
-        Broadcast(h, "server down", 13, 0, -1);
+        i = Broadcast(h, "Server: Shutting down", 21, 0, -1);
     }
     printf("%d clients closed\n\n", i);
 }
 
-void Broadcast(head list, char *message, int buffersize, int flags, int senderPort) {
+int Broadcast(head list, char *message, int buffersize, int flags, int senderPort) {
+    int i = 0;
     addr a = list;
     do {
+        i++;
         a = a->next;
         if (a->port != senderPort)
             send(a->port, message, buffersize, flags);
     } while (a->next != NULL);
+    return i;
 }
-
-
 /*=========================================================================================================*/
