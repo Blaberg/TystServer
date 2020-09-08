@@ -27,15 +27,16 @@ typedef struct Node *ptrtonode;
 typedef ptrtonode head;
 typedef ptrtonode addr;
 
-void Quitall();            /*send msg to all if server shuts down*/
-head MakeEmpty(head h);        /*clearing list*/
-void Delete(int port, head h);    /*delete client values on client exit*/
-void Insert(int port, char *, head h, addr a);/*inserting new client */
-void DeleteList(head h);        /*clearing list*/
-void *Quitproc();             /*signal handler*/
+void quitAll();            /*send msg to all if server shuts down*/
+head makeEmpty(head h);        /*clearing list*/
+void delete(int port, head h);    /*delete client values on client exit*/
+void insert(int port, char *, head h, addr a);/*inserting new client */
+void deleteList(head h);        /*clearing list*/
+void *quitProc();             /*signal handler*/
 void *server(void *arg);        /*server instance for every connected client*/
 
-int Broadcast(head list, char *message, int bufferSize, int flags, int senderPort);
+int broadCast(head list, char *message, int bufferSize, int flags, int senderPort);
+struct Node getUser(char * user);
 
 char username[10];        /*size of username*/
 head h;                /*variable of type struct head*/
@@ -63,7 +64,7 @@ int main(int argc, char *argv[]) {
         portnum = PORT;  //if port number not given as argument then using default port
     printf("PORT NO.:\t%d\n", portnum);
 
-    h = MakeEmpty(NULL);        //frees the list
+    h = makeEmpty(NULL);        //frees the list
 
     /*=set info of server =*/
     server_addr.sin_family = AF_INET;        /* set family to Internet     */
@@ -95,7 +96,7 @@ int main(int argc, char *argv[]) {
     listen(sockfd, BACKLOG);
     printf("waiting for clients......\n");
 
-    if (signal(SIGINT, (void *) Quitproc) == 0)    //signal handler
+    if (signal(SIGINT, (void *) quitProc) == 0)    //signal handler
 
             while (1) {
                 cli_size = sizeof(struct sockaddr_in); //cli_size necessary as an argument for pthread_create
@@ -108,11 +109,12 @@ int main(int argc, char *argv[]) {
                 username[strlen(username) - 1] = ':';
                 printf("\t%d->%s JOINED chatroom\n", new_fd, username);
                 sprintf(buffer, "%s IS ONLINE\n", username);
-                Insert(new_fd, username, h, a);            //inserting newly accepted client socked fd in list
+                insert(new_fd, username, h, a);            //inserting newly accepted client socked fd in list
                 a = a->next;
 
                 /*=notify all clients about newly joining clients=*/
-                Broadcast(h,buffer,sizeof(buffer), 0, new_fd);
+                broadCast(h,buffer,sizeof(buffer), 0, new_fd);
+                getUser(username);
 
                 printf("server got connection from %s & %d\n\n", inet_ntoa(client_addr.sin_addr), new_fd); // debugging
 
@@ -124,7 +126,7 @@ int main(int argc, char *argv[]) {
                 pthread_detach(thr);
             } /*while end*/
 
-    DeleteList(h);                     //deleting all clients when server closes
+    deleteList(h);                     //deleting all clients when server closes
     close(sockfd);
 
 }/********main ends***********/
@@ -143,7 +145,7 @@ void *server(void *arguments) {
     char *strp;
     char *msg = (char *) malloc(MAXDATALEN);
     int ts_fd, x, y;
-    int sfd, msglen;
+    int sfd;
 
     ts_fd = args->port;     /*socket variable passed as arg*/
     strcpy(uname, args->username);
@@ -174,7 +176,7 @@ void *server(void *arguments) {
                 a = a->next;
                 sfd = a->port;
                 if (sfd == ts_fd)
-                    Delete(sfd, h);
+                    delete(sfd, h);
                 if (sfd != ts_fd)
                     send(sfd, buffer, MAXDATALEN, 0);
             } while (a->next != NULL);
@@ -193,7 +195,7 @@ void *server(void *arguments) {
         strp += x;
         strcat(strp, buffer);
 
-        Broadcast(h,msg,strlen(msg);,0,ts_fd);
+        broadCast(h,msg,strlen(msg),0,ts_fd);
 
         bzero(msg, MAXDATALEN);
 
@@ -204,9 +206,9 @@ void *server(void *arguments) {
 
 
 /*=====empties and deletes the list======*/
-head MakeEmpty(head h) {
+head makeEmpty(head h) {
     if (h != NULL)
-        DeleteList(h);
+        deleteList(h);
     h = malloc(sizeof(struct Node));
     if (h == NULL)
         printf("Out of memory!");
@@ -215,7 +217,7 @@ head MakeEmpty(head h) {
 }
 
 /*======delete list=======*/
-void DeleteList(head h) {
+void deleteList(head h) {
     addr a, Tmp;
     a = h->next;
     h->next = NULL;
@@ -227,7 +229,7 @@ void DeleteList(head h) {
 }
 
 /*===============inserting new clients to list==========*/
-void Insert(int port, char *username, head h, addr a) {
+void insert(int port, char *username, head h, addr a) {
     addr TmpCell;
     TmpCell = malloc(sizeof(struct Node));
     if (TmpCell == NULL)
@@ -240,7 +242,7 @@ void Insert(int port, char *username, head h, addr a) {
 
 
 /*===========client deleted from list if client quits================*/
-void Delete(int port, head h) {
+void delete(int port, head h) {
     addr a, TmpCell;
     a = h;
     while (a->next != NULL && a->next->port != port)
@@ -253,24 +255,24 @@ void Delete(int port, head h) {
 }
 
 /*======handling signals==========*/
-void *Quitproc() {
-    Quitall();
+void *quitProc() {
+    quitAll();
     exit(0);
 }
 
 /*===============notifying server shutdown===========*/
-void Quitall() {
+void quitAll() {
     int i;
     if (h->next == NULL) {
         printf("......BYE.....\nno clients \n\n");
         exit(0);
     } else {
-        i = Broadcast(h, "Server: Shutting down", 21, 0, -1);
+        i = broadCast(h, "Server: Shutting down", 21, 0, -1);
     }
     printf("%d clients closed\n\n", i);
 }
 
-int Broadcast(head list, char *message, int buffersize, int flags, int senderPort) {
+int broadCast(head list, char *message, int buffersize, int flags, int senderPort) {
     int i = 0;
     addr a = list;
     do {
@@ -281,4 +283,18 @@ int Broadcast(head list, char *message, int buffersize, int flags, int senderPor
     } while (a->next != NULL);
     return i;
 }
+
+struct Node getUser(char * user){
+    addr a = h;
+    do {
+        a = a->next;
+        if(strcmp(user, a->username) == 0) {
+            printf("Found user: %s\n", user);
+            printf("Port: %d\n", a->port);
+            return *a;
+        }
+    } while (a->next != NULL);
+    printf("Could not find User: %s", user);
+}
+
 /*=========================================================================================================*/
