@@ -1,13 +1,3 @@
-/****SERVER CODE****/
-#include <stdio.h>
-#include <stdlib.h>
-#include <sys/socket.h>        //for sockets
-#include <string.h>        //for string operations
-#include <netinet/in.h>        //Internet Protocol family sockaddr_in defined here
-#include <pthread.h>        // for the cosy POSIX threads
-#include <arpa/inet.h>        // for inet_ntoa() function
-#include <unistd.h>        //NULL constant defined here
-#include <signal.h>        //for ctrl+c signal
 
 
 #pragma clang diagnostic push
