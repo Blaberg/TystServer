@@ -12,18 +12,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="36b1c44d-7a59-4cca-8b0e-96ca2148dbba" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeCache.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeCache.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CMakeDirectoryInformation.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CMakeDirectoryInformation.cmake" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CMakeOutput.log" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CMakeOutput.log" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Makefile.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Makefile.cmake" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Makefile2" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Makefile2" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TargetDirectories.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TargetDirectories.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TystServer.dir/DependInfo.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TystServer.dir/DependInfo.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TystServer.dir/C.includecache" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TystServer.dir/C.includecache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TystServer.dir/build.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TystServer.dir/build.make" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/clion-log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/clion-log.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/Makefile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/TystServer.cbp" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/TystServer.cbp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/cmake_install.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/cmake_install.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/TystServer" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/TystServer" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.c" beforeDir="false" afterPath="$PROJECT_DIR$/main.c" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -44,6 +41,7 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="OCFindUsagesOptions.isSearchForTextOccurrences" value="false" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="cf.first.check.clang-format" value="false" />
@@ -56,12 +54,12 @@
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
   </component>
   <component name="RunManager">
-    <configuration name="TystServer" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="TystServer" TARGET_NAME="TystServer" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="TystServer" RUN_TARGET_NAME="TystServer">
+    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true">
       <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true">
+    <configuration name="TystServer" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="TystServer" TARGET_NAME="TystServer" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="TystServer" RUN_TARGET_NAME="TystServer">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
@@ -80,7 +78,10 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1599557635268</updated>
-      <workItem from="1599557636786" duration="2118000" />
+      <workItem from="1599557636786" duration="10272000" />
+      <workItem from="1599725908639" duration="130000" />
+      <workItem from="1600690893431" duration="2904000" />
+      <workItem from="1601037632842" duration="987000" />
     </task>
     <servers />
   </component>
@@ -88,21 +89,33 @@
     <option name="version" value="3" />
   </component>
   <component name="WindowStateProjectService">
-    <state width="1238" height="174" key="GridCell.Tab.0.bottom" timestamp="1599559014431">
-      <screen x="0" y="23" width="1280" height="729" />
+    <state width="1238" height="173" key="GridCell.Tab.0.bottom" timestamp="1600700921008">
+      <screen x="0" y="23" width="1280" height="724" />
     </state>
-    <state width="1238" height="174" key="GridCell.Tab.0.bottom/0.23.1280.729@0.23.1280.729" timestamp="1599559014431" />
-    <state width="1238" height="174" key="GridCell.Tab.0.center" timestamp="1599559014429">
-      <screen x="0" y="23" width="1280" height="729" />
+    <state width="1238" height="173" key="GridCell.Tab.0.bottom/0.23.1280.724@0.23.1280.724" timestamp="1600700921008" />
+    <state width="1238" height="173" key="GridCell.Tab.0.bottom/0.23.1280.727@0.23.1280.727" timestamp="1600693763076" />
+    <state width="1238" height="174" key="GridCell.Tab.0.bottom/0.23.1280.729@0.23.1280.729" timestamp="1599725812313" />
+    <state width="1238" height="173" key="GridCell.Tab.0.center" timestamp="1600700921008">
+      <screen x="0" y="23" width="1280" height="724" />
     </state>
-    <state width="1238" height="174" key="GridCell.Tab.0.center/0.23.1280.729@0.23.1280.729" timestamp="1599559014429" />
-    <state width="1238" height="174" key="GridCell.Tab.0.left" timestamp="1599559014428">
-      <screen x="0" y="23" width="1280" height="729" />
+    <state width="1238" height="173" key="GridCell.Tab.0.center/0.23.1280.724@0.23.1280.724" timestamp="1600700921008" />
+    <state width="1238" height="173" key="GridCell.Tab.0.center/0.23.1280.727@0.23.1280.727" timestamp="1600693763074" />
+    <state width="1238" height="174" key="GridCell.Tab.0.center/0.23.1280.729@0.23.1280.729" timestamp="1599725812312" />
+    <state width="1238" height="173" key="GridCell.Tab.0.left" timestamp="1600700921007">
+      <screen x="0" y="23" width="1280" height="724" />
     </state>
-    <state width="1238" height="174" key="GridCell.Tab.0.left/0.23.1280.729@0.23.1280.729" timestamp="1599559014428" />
-    <state width="1238" height="174" key="GridCell.Tab.0.right" timestamp="1599559014430">
-      <screen x="0" y="23" width="1280" height="729" />
+    <state width="1238" height="173" key="GridCell.Tab.0.left/0.23.1280.724@0.23.1280.724" timestamp="1600700921007" />
+    <state width="1238" height="173" key="GridCell.Tab.0.left/0.23.1280.727@0.23.1280.727" timestamp="1600693763073" />
+    <state width="1238" height="174" key="GridCell.Tab.0.left/0.23.1280.729@0.23.1280.729" timestamp="1599725812311" />
+    <state width="1238" height="173" key="GridCell.Tab.0.right" timestamp="1600700921008">
+      <screen x="0" y="23" width="1280" height="724" />
     </state>
-    <state width="1238" height="174" key="GridCell.Tab.0.right/0.23.1280.729@0.23.1280.729" timestamp="1599559014430" />
+    <state width="1238" height="173" key="GridCell.Tab.0.right/0.23.1280.724@0.23.1280.724" timestamp="1600700921008" />
+    <state width="1238" height="173" key="GridCell.Tab.0.right/0.23.1280.727@0.23.1280.727" timestamp="1600693763075" />
+    <state width="1238" height="174" key="GridCell.Tab.0.right/0.23.1280.729@0.23.1280.729" timestamp="1599725812312" />
+    <state x="305" y="74" width="670" height="676" key="search.everywhere.popup" timestamp="1600691745321">
+      <screen x="0" y="23" width="1280" height="727" />
+    </state>
+    <state x="305" y="74" width="670" height="676" key="search.everywhere.popup/0.23.1280.727@0.23.1280.727" timestamp="1600691745321" />
   </component>
 </project>

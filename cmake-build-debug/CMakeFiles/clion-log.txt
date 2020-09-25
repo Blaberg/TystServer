@@ -1,11 +1,4 @@
-/private/var/folders/yv/0d9t4cns48g4lrrkt7vs8ytm0000gn/T/AppTranslocation/69897638-F738-494F-9C26-A2B83ADDD8EB/d/CLion.app/Contents/bin/cmake/mac/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /Users/Herman/Desktop/Projects/TystServer
--- The C compiler identification is AppleClang 11.0.3.11030032
--- Check for working C compiler: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc
--- Check for working C compiler: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc - works
--- Detecting C compiler ABI info
--- Detecting C compiler ABI info - done
--- Detecting C compile features
--- Detecting C compile features - done
+/Users/Herman/Desktop/CLion.app/Contents/bin/cmake/mac/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /Users/Herman/Desktop/Projects/TystServer
 -- Configuring done
 -- Generating done
 -- Build files have been written to: /Users/Herman/Desktop/Projects/TystServer/cmake-build-debug

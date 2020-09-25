@@ -13,8 +13,6 @@ stdlib.h
 -
 sys/socket.h
 -
-sys/types.h
--
 string.h
 -
 netinet/in.h
