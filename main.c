@@ -14,10 +14,18 @@ Email ID: ruchir.sharma@students.iiit.ac.in
 #include <string.h>
 #include <sys/types.h>
 
-int main()
-{
+int main(){
+
+    struct user{
+        char username[10];
+        int conn;
+        struct user *next;
+    };
+
+    struct user all[10];
     int fd = 0;
     char buff[1024];
+    char username[10];
 
     //Setup Buffer Array
     memset(buff, '0',sizeof(buff));
@@ -45,19 +53,21 @@ int main()
     int conn;
 
     listen(fd, 10);
-    while(	conn = accept(fd, (struct sockaddr*)NULL, NULL))
-    {
+
+
+    while(conn = accept(fd, (struct sockaddr*)NULL, NULL)){
         int childpid,n;
         if ( (childpid = fork ()) == 0 ){
             //close listening socket
             close (fd);
 
+            recv(conn, username, 10,0);
+
             //Clear Zeroes
             bzero(buff,256);
-            while ((n = recv(conn, buff, 256,0)) > 0)
-            {
-                printf("Server Received: %s",buff);
-                send(conn, buff, strlen(buff), 0);
+            while ((n = recv(conn, buff, 256,0)) > 0){
+                printf("%s> %s",username, buff);
+                //send(conn, buff, strlen(buff), 0);
                 bzero(buff,256);
 
             }
